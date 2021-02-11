@@ -1,4 +1,6 @@
-export const Posts = ({ posts, wasError }) => {
+import { Post } from './Post';
+
+export const PostList = ({ posts, wasError }) => {
   if (wasError) return <div>Something went wrong!</div>;
   return (
     <div>
@@ -6,7 +8,7 @@ export const Posts = ({ posts, wasError }) => {
         {posts.map((post) => (
           <li key={post.id}>
             {/* use a key so that React can keep track of the list if we sort or filter */}
-            <pre>{JSON.stringify(post, null, 2)}</pre>
+            <Post post={post} />
           </li>
         ))}
       </ul>

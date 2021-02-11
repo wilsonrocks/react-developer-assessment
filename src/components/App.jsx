@@ -1,12 +1,12 @@
 import { useGetPostsFromApi } from '../api';
-import { Posts } from './Posts';
+import { PostList } from './PostList';
 
 function App() {
   const [posts, wasError] = useGetPostsFromApi();
 
   return (
     <div>
-      <Posts posts={posts} wasError={wasError} />
+      <PostList posts={posts} wasError={wasError} />
     </div>
   );
 }
