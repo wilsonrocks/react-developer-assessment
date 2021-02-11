@@ -15,6 +15,7 @@ export const useGetPostsFromApi = () => {
    * finite state machine/statechart library.
    */
   const [posts, setPosts] = useState([]);
+  // TODO replace with a simple finite state rather than boolean flags
   const [wasError, setWasError] = useState(false);
 
   useEffect(() => {

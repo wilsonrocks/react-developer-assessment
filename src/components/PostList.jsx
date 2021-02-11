@@ -4,9 +4,16 @@ import { getCategoryNames } from '../util/getCategoryNames';
 import { Post } from './Post';
 
 export const PostList = ({ posts, wasError }) => {
-  const [categoryFilter, setCategoryFilter] = useState('');
+  const [categoryFilter, setCategoryFilter] = useState('All');
+  const [numberOfDisplayedPosts, setNumberOfDisplayedPosts] = useState(10);
   const categories = getCategoryNames(posts);
-  const filteredPosts = filterPosts(posts, categoryFilter);
+  const filteredPosts = filterPosts(
+    posts,
+    categoryFilter,
+    numberOfDisplayedPosts
+  );
+  const displayShowMoreButton = numberOfDisplayedPosts < posts.length;
+
   if (wasError) return <div>Something went wrong!</div>;
 
   return (
@@ -34,6 +41,16 @@ export const PostList = ({ posts, wasError }) => {
           </li>
         ))}
       </ul>
+
+      {displayShowMoreButton ? (
+        <button
+          onClick={() => {
+            setNumberOfDisplayedPosts(numberOfDisplayedPosts + 5);
+          }}
+        >
+          Show More
+        </button>
+      ) : null}
     </div>
   );
 };
