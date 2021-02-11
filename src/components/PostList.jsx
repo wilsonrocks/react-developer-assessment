@@ -8,7 +8,7 @@ export const PostList = ({ posts, wasError }) => {
         {posts.map((post) => (
           <li key={post.id}>
             {/* use a key so that React can keep track of the list if we sort or filter */}
-            <Post post={post} />
+            <Post {...post} />
           </li>
         ))}
       </ul>
