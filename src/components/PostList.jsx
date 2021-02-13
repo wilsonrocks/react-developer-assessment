@@ -35,12 +35,8 @@ export const PostList = ({ posts, status }) => {
   const [categoryFilter, setCategoryFilter] = useState('All');
   const [numberOfDisplayedPosts, setNumberOfDisplayedPosts] = useState(10);
   const categories = getCategoryNames(posts);
-  const filteredPosts = filterPosts(
-    posts,
-    categoryFilter,
-    numberOfDisplayedPosts
-  );
-  const displayShowMoreButton = numberOfDisplayedPosts < posts.length;
+  const filteredPosts = filterPosts(posts, categoryFilter);
+  const displayShowMoreButton = numberOfDisplayedPosts < filteredPosts.length;
 
   switch (status) {
     case 'NOT_REQUESTED':
@@ -57,7 +53,7 @@ export const PostList = ({ posts, status }) => {
           />
 
           <Posts>
-            {filteredPosts.map((post) => (
+            {filteredPosts.slice(0, numberOfDisplayedPosts).map((post) => (
               <ListItem key={post.id}>
                 {/* use a key so that React can keep track of the list if we sort or filter */}
                 <Post {...post} />
