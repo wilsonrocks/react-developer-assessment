@@ -2,6 +2,19 @@
 
 There's some explanations in the code, but this file might be handy.
 
+## Tests
+
+There aren't any! I ran out of time, sadly. I'm a big user of Cypress, although it's not without is faults, particularly with React apps. I like to add data attributes to elements so that they are easier to select with frontend testing frameworks.
+
+I would have written tests to check the filter worked - would have gone through the mock data to find a post that _wasn't_ about Marketing and Automation and checked that it was not found, then changed the filter to All and then Marketing and Automation and checked that it _was_ found.
+
+Also, testing the Load More button and how it works when the filter is applited.
+
+## Avatars
+
+I made a custom `<img>` wrapper to display initials in a circle if the image load fails, rather than displaying a small dot (the border was collapsing) - a bit like Microsoft Teams :)
+I took the liberty of changing `data.json` so this always happens - but the robot api sometimes fails on its own.
+
 ## CSS
 
 Most styles are applied using the Styled-Components library, so these are on a per component basis, and are scoped to avoid namespace pollution.
