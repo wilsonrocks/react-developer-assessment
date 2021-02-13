@@ -22,7 +22,7 @@ export const CategoryPicker = ({
   categories,
 }) => (
   <CategoryPickerContainer>
-    <Label for="categoryPicker">Category:</Label>
+    <Label htmlFor="categoryPicker">Category:</Label>
     <Select
       id="categoryPicker"
       onChange={(event) => {
