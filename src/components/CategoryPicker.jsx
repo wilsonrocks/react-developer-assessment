@@ -11,6 +11,9 @@ const Label = styled.label`
 
 const Select = styled.select`
   height: 2rem;
+  background-color: darkcyan;
+  color: white;
+  border-radius: 0.5rem;
 `;
 
 export const CategoryPicker = ({

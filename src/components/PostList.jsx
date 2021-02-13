@@ -2,6 +2,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { filterPosts } from '../util/filterPosts';
 import { getCategoryNames } from '../util/getCategoryNames';
+import { Button } from './Button';
 import { CategoryPicker } from './CategoryPicker';
 import { Post } from './Post';
 
@@ -22,6 +23,11 @@ const ListItem = styled.li`
   Post component outside of here and using an li in there would be semantically
   wrong.justify-content
    */
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
 `;
 
 export const PostList = ({ posts, wasError }) => {
@@ -55,13 +61,15 @@ export const PostList = ({ posts, wasError }) => {
       </Posts>
 
       {displayShowMoreButton ? (
-        <button
-          onClick={() => {
-            setNumberOfDisplayedPosts(numberOfDisplayedPosts + 5);
-          }}
-        >
-          Show More
-        </button>
+        <ButtonContainer>
+          <Button
+            onClick={() => {
+              setNumberOfDisplayedPosts(numberOfDisplayedPosts + 5);
+            }}
+          >
+            Show More
+          </Button>
+        </ButtonContainer>
       ) : null}
     </PostListContainer>
   );
