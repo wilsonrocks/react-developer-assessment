@@ -8,9 +8,14 @@ const PostContainer = styled.article`
   border-radius: 0.5rem;
   padding: 1rem;
   background-color: #fff;
+
+  display: flex;
+  flex-direction: column;
 `;
 
-const Title = styled.h3``;
+const Title = styled.h3`
+  min-height: 3rem;
+`;
 
 const Information = styled.div`
   display: flex;
