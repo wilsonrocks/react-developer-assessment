@@ -2,8 +2,8 @@ import { useGetPostsFromApi } from '../api';
 import { PostList } from './PostList';
 import styled from 'styled-components';
 
-const AppContainer = styled.div`
-  max-width: 100ch;
+const AppContainer = styled.main`
+  max-width: 1200px;
   padding: 1rem;
   margin: auto;
 `;
@@ -12,10 +12,7 @@ function App() {
   const [posts, wasError] = useGetPostsFromApi();
   return (
     <AppContainer>
-      <hgroup>
-        <h1>NetConstruct</h1>
-        <h2>Articles by Robots</h2>
-      </hgroup>
+      <h1>Robot Articles by NetConstruct</h1>
       <PostList posts={posts} wasError={wasError} />
     </AppContainer>
   );

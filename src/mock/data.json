@@ -5,10 +5,10 @@
       "title": "in hac habitasse platea dictumst maecenas ut massa quis augue",
       "publishDate": "2020-09-28T15:59:05Z",
       "author": {
-        "name": "Bunnie Mathey",
-        "avatar": "https://robohash.org/quamnonet.jpg?size=50x50&set=set1"
+        "name": "Broken Avatar Image Use Initials",
+        "avatar": "not a valid url"
       },
-      "summary": "Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet. Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo.",
+      "summary": "This should be using the initial letters of the first and last words of the author's name.",
       "categories": [
         {
           "id": "5ee1187a-26f3-4819-b710-ccd99efc94df",
