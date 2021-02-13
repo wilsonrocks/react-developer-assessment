@@ -15,22 +15,26 @@ export const useGetPostsFromApi = () => {
    * finite state machine/statechart library.
    */
   const [posts, setPosts] = useState([]);
-  // TODO replace with a simple finite state rather than boolean flags
-  const [wasError, setWasError] = useState(false);
+  const [status, setStatus] = useState('NOT_REQUESTED');
 
   useEffect(() => {
-    /**
-     * The fetch API isn't the nicest to use.
-     * I tend towards using Axios as it's battle tested and can easily be
-     * polyfilled to support Internet Explorer.
-     */
-    fetch('/api/posts')
-      .then((response) => response.json())
-      .then((data) => setPosts(data.posts))
-      .catch(() => {
-        setWasError(true);
-      });
-  }, []); // empty array here means useEffect will only call this when the component mounts
+    if (status === 'NOT_REQUESTED') {
+      /**
+       * The fetch API isn't the nicest to use.
+       * I tend towards using Axios as it's battle tested and can easily be
+       * polyfilled to support Internet Explorer.
+       */
+      fetch('/api/posts')
+        .then((response) => response.json())
+        .then((data) => {
+          setPosts(data.posts);
+          setStatus('COMPLETED');
+        })
+        .catch(() => {
+          setStatus('ERROR');
+        });
+    }
+  }, [status]); // empty array here means useEffect will only call this when the component mounts
 
-  return [posts, wasError];
+  return [posts, status];
 };

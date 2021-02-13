@@ -5,6 +5,7 @@ import { getCategoryNames } from '../util/getCategoryNames';
 import { Button } from './Button';
 import { CategoryPicker } from './CategoryPicker';
 import { Post } from './Post';
+import { Spinner } from './Spinner';
 
 const PostListContainer = styled.div``;
 
@@ -30,7 +31,7 @@ const ButtonContainer = styled.div`
   justify-content: center;
 `;
 
-export const PostList = ({ posts, wasError }) => {
+export const PostList = ({ posts, status }) => {
   const [categoryFilter, setCategoryFilter] = useState('All');
   const [numberOfDisplayedPosts, setNumberOfDisplayedPosts] = useState(10);
   const categories = getCategoryNames(posts);
@@ -41,36 +42,50 @@ export const PostList = ({ posts, wasError }) => {
   );
   const displayShowMoreButton = numberOfDisplayedPosts < posts.length;
 
-  if (wasError) return <div>Something went wrong!</div>;
+  switch (status) {
+    case 'NOT_REQUESTED':
+    case 'WAITING':
+      return <Spinner>Waiting to retrieve posts...</Spinner>;
 
-  return (
-    <PostListContainer>
-      <CategoryPicker
-        categories={categories}
-        categoryFilter={categoryFilter}
-        setCategoryFilter={setCategoryFilter}
-      />
+    case 'COMPLETED':
+      return (
+        <PostListContainer>
+          <CategoryPicker
+            categories={categories}
+            categoryFilter={categoryFilter}
+            setCategoryFilter={setCategoryFilter}
+          />
 
-      <Posts>
-        {filteredPosts.map((post) => (
-          <ListItem key={post.id}>
-            {/* use a key so that React can keep track of the list if we sort or filter */}
-            <Post {...post} />
-          </ListItem>
-        ))}
-      </Posts>
+          <Posts>
+            {filteredPosts.map((post) => (
+              <ListItem key={post.id}>
+                {/* use a key so that React can keep track of the list if we sort or filter */}
+                <Post {...post} />
+              </ListItem>
+            ))}
+          </Posts>
 
-      {displayShowMoreButton ? (
-        <ButtonContainer>
-          <Button
-            onClick={() => {
-              setNumberOfDisplayedPosts(numberOfDisplayedPosts + 5);
-            }}
-          >
-            Show More
-          </Button>
-        </ButtonContainer>
-      ) : null}
-    </PostListContainer>
-  );
+          {displayShowMoreButton ? (
+            <ButtonContainer>
+              <Button
+                onClick={() => {
+                  setNumberOfDisplayedPosts(numberOfDisplayedPosts + 5);
+                }}
+              >
+                Show More
+              </Button>
+            </ButtonContainer>
+          ) : null}
+        </PostListContainer>
+      );
+
+    case 'ERROR':
+    default:
+      return (
+        <p>
+          Sorry! Something went wrong with fetching the posts. Please try
+          refreshing, or contact NetConstruct.
+        </p>
+      );
+  }
 };
